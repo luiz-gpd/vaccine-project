@@ -2,17 +2,25 @@ import { useHistory, useLocation } from 'react-router'
 import ClayNavigationBar from '@clayui/navigation-bar'
 import ClayLink from '@clayui/link'
 import React from 'react'
-import Home from '../../pages/Home'
+import Agendamento from '../../pages/Agendamento'
+import Lista from '../../pages/Lista'
 
 const NavigationBar = () => {
 
     const routes = [
         {
-          component: Home,
-          name: 'Home',
+          component: Agendamento,
+          name: 'Agendamento',
           path: '/',
           private: false
         },
+        {
+          component: Lista,
+          name: 'Lista',
+          path: '/lista',
+          private: false
+        },
+        
       ];
 
     const history = useHistory();
