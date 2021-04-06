@@ -1151,6 +1151,35 @@
     "@clayui/icon" "^3.1.0"
     classnames "^2.2.6"
 
+"@clayui/date-picker@^3.25.1":
+  version "3.25.1"
+  resolved "https://registry.yarnpkg.com/@clayui/date-picker/-/date-picker-3.25.1.tgz#539644af297551133874acb46d976d837db25f49"
+  integrity sha512-BzulbC8GoVUcy+AOFOVDJ1nMwqTr2JKBgdIDP9ZfWfikyy7EuWAVKjhJSn04m8AXxbtg9v2nsHJbT4utzABbcg==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/drop-down" "^3.25.1"
+    "@clayui/form" "^3.14.4"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/shared" "^3.5.1"
+    "@clayui/time-picker" "^3.2.6"
+    classnames "^2.2.6"
+    date-fns "^2.14.0"
+
+"@clayui/drop-down@^3.25.1":
+  version "3.25.1"
+  resolved "https://registry.yarnpkg.com/@clayui/drop-down/-/drop-down-3.25.1.tgz#33cf55885de9982ea10321fb96c1ade71cbcf239"
+  integrity sha512-teIMLEvs8CZY7oYwJuaTsUQIu7/veyqDhMqhi0oYxk0mwTkstJZEsAbyQCX50veXu11armincjxjqo/fcn3eMQ==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/form" "^3.14.4"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/link" "^3.2.0"
+    "@clayui/shared" "^3.5.1"
+    classnames "^2.2.6"
+    dom-align "^1.10.2"
+    react-transition-group "^4.4.1"
+    warning "^4.0.3"
+
 "@clayui/form@^3.14.4":
   version "3.14.4"
   resolved "https://registry.yarnpkg.com/@clayui/form/-/form-3.14.4.tgz#50725d4647a3e1fba3fc5449429f8baec694b2df"
@@ -1213,6 +1242,17 @@
   dependencies:
     "@clayui/button" "^3.6.0"
     "@clayui/link" "^3.2.0"
+
+"@clayui/time-picker@^3.2.6":
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/@clayui/time-picker/-/time-picker-3.2.6.tgz#feaa9e18ce796ccb48008afa4d6b399e8bce4e02"
+  integrity sha512-ka0EQ2rf/BZ45B6zMlkSE5d4bh/sq3KioVVpGpVhdoMpG/PxBhQ29GDyZxGvnPECZ6xMXqI48ivcbW4fFC+a6A==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/form" "^3.14.4"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/shared" "^3.5.1"
+    classnames "^2.2.6"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -3944,7 +3984,7 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-date-fns@^2.0.1:
+date-fns@^2.0.1, date-fns@^2.14.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.19.0.tgz#65193348635a28d5d916c43ec7ce6fbd145059e1"
   integrity sha512-X3bf2iTPgCAQp9wvjOQytnf5vO5rESYRXlPIVcgSbtT5OTScPcsf9eZU+B/YIkKAtYr5WeCii58BgATrNitlWg==
@@ -4175,6 +4215,11 @@ dom-accessibility-api@^0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/dom-accessibility-api/-/dom-accessibility-api-0.5.4.tgz#b06d059cdd4a4ad9a79275f9d414a5c126241166"
   integrity sha512-TvrjBckDy2c6v6RLxPv5QXOnU+SmF9nBII5621Ve5fu6Z/BDrENurBEvlC1f44lKEUVqOpK4w9E5Idc5/EgkLQ==
+
+dom-align@^1.10.2:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/dom-align/-/dom-align-1.12.0.tgz#56fb7156df0b91099830364d2d48f88963f5a29c"
+  integrity sha512-YkoezQuhp3SLFGdOlr5xkqZ640iXrnHAwVYcDg8ZKRUtO7mSzSC2BA5V0VuyAwPSJA4CLIc6EDDJh4bEsD2+zA==
 
 dom-converter@^0.2:
   version "0.2.0"
