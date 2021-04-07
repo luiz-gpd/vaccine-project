@@ -1,5 +1,3 @@
-const users = require("./controllers/user.controller")
-
-const data = [users];
+const data = [];
 
 module.exports = data;

@@ -1,22 +1,42 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Page from '../../components/Page'
 import { Formik, ErrorMessage, Form } from 'formik'
 import schema from '../../utils/schema'
-import ClayForm, { ClayInput } from '@clayui/form'
+import ClayForm, { ClayInput, ClaySelectWithOption } from '@clayui/form'
 import ClayButton from '@clayui/button'
-import ClayDatePicker from '@clayui/date-picker'
-import AgendamentoSelect from '../../components/Agendamento/AgendamentoSelect'
+import options from '../../components/Agendamento/options'
 import DatePicker from '../../components/Agendamento/DatePicker'
+import api from '../../utils/api'
 
 const Agendamento = () => {
-    // const [state, setstate] = useState(null)
 
-    const day = new Date();
+    const onSubmit = async (values) => {
 
-    const onSubmit = () => {
-        console.log(day.getDate());
-        console.log(day.getMonth() + 1);
-        console.log(day.getYear() % 100);
+        const bornOn = values.bornDate;
+        const d = new Date();
+        
+        var idade = d.getFullYear() - bornOn.getFullYear();
+        
+        if (d.getMonth() + 1 < bornOn.getMonth() + 1 || (d.getMonth() + 1 === bornOn.getMonth() + 1 && d.getDate() < bornOn.getDate())) {
+            idade--;
+        }
+        const user = {
+            name:values.name,
+            age:idade,
+            consultationDate:values.consultationDate,
+            consultationTime:values.consultationTime,
+        };
+
+        try {
+            const response = await api.post('/user', user)
+            if (response.data === "Já há duas pessoas nesse horário") {
+                alert(response.data);
+            } else {
+            alert("Cadastro Realizado");
+        }
+        } catch (e) {
+            alert(e.response.data.message);
+        }
     }
 
     return (
@@ -28,6 +48,7 @@ const Agendamento = () => {
                     name: '',
                     bornDate: '',
                     consultationDate: '',
+                    consultationTime: '',
                 }}>
                 {({ values, handleChange, handleSubmit }) => (
                     <Form className="mt-6" onSubmit={handleSubmit}>
@@ -60,7 +81,13 @@ const Agendamento = () => {
                         </ClayForm.Group>
                         <ClayForm.Group>
                             <b>Horário da Consulta:</b>
-                            <AgendamentoSelect />
+                            <ClaySelectWithOption
+                                name="consultationTime" 
+                                onChange={handleChange}
+                                options={options}
+                            >   
+                            </ClaySelectWithOption>
+                            <ErrorMessage name="consultationTime" />
                         </ClayForm.Group>
                         <ClayButton type="submit">Enviar</ClayButton>
                     </Form>

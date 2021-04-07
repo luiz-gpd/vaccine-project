@@ -11,8 +11,11 @@ class User {
         const user = req.body;
         const { consultationTime: time } = req.body;
         const { age: nowAge } = req.body;
+        const { consultationDate: date } = req.body;
 
-        const peopleOnThisTime = data.filter((dat) => dat.consultationTime === time)
+        const peopleOnThisDate = data.filter((dat) => dat.consultationDate === date);
+
+        const peopleOnThisTime = peopleOnThisDate.filter((dat) => dat.consultationTime === time)
 
         if (peopleOnThisTime.length === 2) {
             if (nowAge >= 60) {
