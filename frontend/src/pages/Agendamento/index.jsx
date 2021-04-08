@@ -15,7 +15,7 @@ const Agendamento = () => {
         const bornOn = values.bornDate;
         const d = new Date();
         
-        var idade = d.getFullYear() - bornOn.getFullYear();
+        var idade = d.getFullYear() - bornOn.getYear() - 1900;
         
         if (d.getMonth() + 1 < bornOn.getMonth() + 1 || (d.getMonth() + 1 === bornOn.getMonth() + 1 && d.getDate() < bornOn.getDate())) {
             idade--;
@@ -25,7 +25,8 @@ const Agendamento = () => {
             age:idade,
             consultationDate:values.consultationDate,
             consultationTime:values.consultationTime,
-            attended:false
+            attended:false,
+            consultInfo:""
         };
 
         try {

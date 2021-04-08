@@ -56,6 +56,22 @@ class User {
         res.send(user)
     }
 
+    async createConsult(req, res) {
+        const { name } = req.params
+        const { consultationDate } = req.params
+        const { consultationTime } = req.params
+
+        const peopleOnThisDate = data.filter((dat) => dat.consultationDate === consultationDate);
+        const peopleOnThisTime = peopleOnThisDate.filter((dat) => dat.consultationTime === consultationTime)
+        const individual = peopleOnThisTime.filter((dat) => dat.name === name)
+
+        const position = data.indexOf(individual[0]);
+        const { consultInfo } = req.body
+        data[(position)].consultInfo = consultInfo;
+        const user = data.filter((dat) => dat.name === name)
+        res.send(user)
+    }
+
 };
 
 module.exports = new User();

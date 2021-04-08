@@ -7,5 +7,6 @@ const Routes = express.Router();
 Routes.get("/user", UserController.index);
 Routes.post("/user", UserController.store);
 Routes.put("/user/:name/:consultationDate/:consultationTime", UserController.updateAttended);
+Routes.post("/user/:name/:consultationDate/:consultationTime", UserController.createConsult);
 
 module.exports = Routes;

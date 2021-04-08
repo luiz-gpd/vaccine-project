@@ -7,6 +7,7 @@ const UserSchema =
         consultationDate: Date,
         consultationTime: String,
         attended: Boolean,
+        consultInfo: String,
     }
 
 const UserModel = mongoose.model("user", UserSchema);
