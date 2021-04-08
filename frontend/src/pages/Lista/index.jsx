@@ -81,7 +81,7 @@ const Lista = () => {
                                     <ClayTable.Cell>{user.consultationTime}</ClayTable.Cell>
                                     <ClayTable.Cell>
                                         <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
-                                            disabled={(user.consultationDate > new Date()) ? "" : "anything"}
+                                            // disabled={(user.consultationDate > new Date()) ? "" : "anything"}
                                             toggled={user.attended}
                                             onToggle={() => onToggle(user.name, user.consultationDate, user.consultationTime)} />
                                         {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"

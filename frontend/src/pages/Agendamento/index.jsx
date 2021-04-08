@@ -5,14 +5,14 @@ import schema from '../../utils/schema'
 import ClayForm, { ClayInput, ClaySelectWithOption } from '@clayui/form'
 import ClayButton from '@clayui/button'
 import options from '../../components/Agendamento/options'
-import DatePicker from '../../components/Agendamento/DatePicker'
+import DatePicker from '../../components/Datepicker'
 import api from '../../utils/api'
 
 const Agendamento = () => {
 
     const onSubmit = async (values) => {
 
-        const bornOn = values.bornDate;
+        const bornOn = values.birthDate;
         const d = new Date();
         
         var idade = d.getFullYear() - bornOn.getYear() - 1900;
@@ -48,7 +48,7 @@ const Agendamento = () => {
                 onSubmit={onSubmit}
                 initialValues={{
                     name: '',
-                    bornDate: '',
+                    birthDate: '',
                     consultationDate: '',
                     consultationTime: '',
                 }}>
@@ -59,28 +59,21 @@ const Agendamento = () => {
                             <ClayInput name="name" type="text" value={values.name} placeholder="Exemplo exemplo" onChange={handleChange} />
                             <ErrorMessage name="name" />
                         </ClayForm.Group>
+                        <div display="flex">
                         <ClayForm.Group>
                             <DatePicker
-                                b='Data de Nascimento:'
-                                name='bornDate'
+                                b="Data de Nascimento: "
+                                name="birthDate"
                                 placeholder='01/01/2000'
-                                years={{
-                                    end: 2021,
-                                    start: 1905
-                                }}
+                                maxDate={new Date()}
                             />
-                        </ClayForm.Group>
-                        <ClayForm.Group>
                             <DatePicker
-                                b='Data da consulta'
+                                b="Data da consulta: "
                                 placeholder="01/01/2021"
                                 name="consultationDate"
-                                years={{
-                                    end: 2021,
-                                    start: 2021
-                                }}
+                                minDate={new Date()}
                             />
-                        </ClayForm.Group>
+                        </ClayForm.Group></div>
                         <ClayForm.Group>
                             <b>Horário da Consulta:</b>
                             <ClaySelectWithOption
