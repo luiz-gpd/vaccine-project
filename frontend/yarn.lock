@@ -1243,6 +1243,13 @@
     "@clayui/button" "^3.6.0"
     "@clayui/link" "^3.2.0"
 
+"@clayui/table@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@clayui/table/-/table-3.1.0.tgz#584629c6d945c0fff45900a387a528985c33a94e"
+  integrity sha512-SmN/A36uOS9nCYxRmZe8LgaprGDI7RoPgcsmlj48LBL1cBga+gtGM55Z5yq1ewHIiz0GTJW88OsPuTKO+oFNRg==
+  dependencies:
+    classnames "^2.2.6"
+
 "@clayui/time-picker@^3.2.6":
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/@clayui/time-picker/-/time-picker-3.2.6.tgz#feaa9e18ce796ccb48008afa4d6b399e8bce4e02"

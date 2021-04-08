@@ -6,6 +6,7 @@ const UserSchema =
         age: Number,
         consultationDate: Date,
         consultationTime: String,
+        attended: Boolean,
     }
 
 const UserModel = mongoose.model("user", UserSchema);

@@ -25,6 +25,7 @@ const Agendamento = () => {
             age:idade,
             consultationDate:values.consultationDate,
             consultationTime:values.consultationTime,
+            attended:false
         };
 
         try {
@@ -54,7 +55,7 @@ const Agendamento = () => {
                     <Form className="mt-6" onSubmit={handleSubmit}>
                         <ClayForm.Group>
                             <b>Nome:</b>
-                            <ClayInput name="name" type="text" value={values.name} placeholder="Fulano de Tal" onChange={handleChange} />
+                            <ClayInput name="name" type="text" value={values.name} placeholder="Exemplo exemplo" onChange={handleChange} />
                             <ErrorMessage name="name" />
                         </ClayForm.Group>
                         <ClayForm.Group>
