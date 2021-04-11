@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const UserSchema = 
+const UserSchema = new mongoose.Schema(
     {
         name: String,
         age: Number,
@@ -8,7 +8,9 @@ const UserSchema =
         consultationTime: String,
         attended: Boolean,
         consultInfo: String,
-    }
+    }, {
+        timestamps: true
+    });
 
 const UserModel = mongoose.model("user", UserSchema);
 

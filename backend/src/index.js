@@ -1,11 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan')
+const mongoose = require('mongoose');
 const Routes = require('./routes');
 
 require('dotenv').config();
 
-const { HTTP_PORT } = process.env;
+const { MONGO_URL ,HTTP_PORT } = process.env;
+
+mongoose.connect(MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
 const app = express();
 

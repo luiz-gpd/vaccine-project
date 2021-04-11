@@ -36,25 +36,30 @@ const Lista = () => {
         });
         setLoading(false);
     };
-
+    
     useEffect(() => {
         getUsers();
     }, [])
-
-    const onToggle = async (name, date, time) => {
-        await api.put(`/user/${name}/${date}/${time}`);
+    
+    const onToggle = async (id, attended) => {
+        const formData = {
+            attended:!attended
+        }
+        await api.put(`/user/${id}`, formData);
         getUsers();
     }
-
-    const getModalInfo = ( name, date, time, info ) => {
+    
+    const getModalInfo = ( id, info ) => {
         setVisible(true);
         setForm({
-            name:name,
-            consultationDate:date,
-            consultationTime:time,
+            _id:id,
             consultInfo:info
         })
     }
+    
+    // const compare = (a, b) => {
+    //     return (parseInt(a) - parseInt(b));
+    // }
 
     return (
         <Page title="Lista de Agendamentos">
@@ -83,9 +88,9 @@ const Lista = () => {
                                         <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
                                             disabled={(user.consultationDate > new Date()) ? "" : "not-disabled"}
                                             toggled={user.attended}
-                                            onToggle={() => onToggle(user.name, user.consultationDate, user.consultationTime)} />
+                                            onToggle={() => onToggle(user._id, user.attended)} />
                                         {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"
-                                        symbol="comments" onClick={() => getModalInfo(user.name, user.consultationDate, user.consultationTime, user.consultInfo)}/>}
+                                        symbol="comments" onClick={() => getModalInfo(user._id, user.consultInfo)}/>}
                                     </ClayTable.Cell>
                                 </ClayTable.Row>
 
@@ -97,9 +102,7 @@ const Lista = () => {
                         onClose={onClose}
                         observer={observer}
                         title="Dados da consulta"
-                        name={form.name}
-                        date={form.consultationDate}
-                        time={form.consultationTime}
+                        id={form._id}
                         >{form.consultInfo}
             </Modal>
                 </>)}

@@ -1,86 +1,66 @@
-const data = require("../database");
 const moment = require('moment');
-
-const whereToSave = (date, time) => {
-    for (i=0; i<data.length; i++) {
-        if(moment(date).isBefore(data[(i)].consultationDate) || (moment(date).isSame(data[(i)].consultationDate) && parseInt(time) < parseInt(data[(i)].consultationTime))) {
-            return i;
-        }
-    }
-    return (data.length)
-}
-   
+const UserModel = require("../models/user.model");
+const DayModel = require("../models/day.model");
 
 class User {
     async index(req, res) {
-        res.send(data)
+
+        const users = await UserModel.find();
+
+        res.send( users )
     }
 
     async store(req, res) {
+        const body = req.body;
 
-        const user = req.body;
-        const { consultationTime: time } = req.body;
-        const { age: nowAge } = req.body;
-        const { consultationDate: date } = req.body;
+        // const dates = await DayModel.find();
+        // const onThisDay = dates.filter((date) => date.date === body.consultationDate);
 
-        const peopleOnThisDate = data.filter((dat) => dat.consultationDate === date);
+        // if (onThisDay.length === 2) {
+        //     if (body.age >= 60 && (onThisDay[0] < 60 || onThisDay[1] < 60)) {
 
-        const peopleOnThisTime = peopleOnThisDate.filter((dat) => dat.consultationTime === time)
+        //     } 
 
-        if (peopleOnThisTime.length === 2) {
-            if (nowAge >= 60) {
-                if (peopleOnThisTime[0].age < 60 || peopleOnThisTime[1].age < 60) {
-                    data.push(user);
-                    if (peopleOnThisTime[0].age >= peopleOnThisTime[1].age) {
-                        const position = data.indexOf(peopleOnThisTime[1]);
-                        data.splice(position, 1);
-                        res.send({ user })
-                    }
-                    else {
-                        const position = data.indexOf(peopleOnThisTime[0]);
-                        data.splice(position, 1);
-                        res.send({ user })
-                    }
-                }
-            } else {
-                res.send("Já há duas pessoas nesse horário");
-            }
-        } else {
-            const position = whereToSave(date, time )
-            data.splice(position , 0, user);
+        // } else {
+
+            const user = await UserModel.create(body);
+            // const date = {
+            //     date: body.consultationDate,
+            //     complement: [
+            //         {
+            //             userTime: user.consultationTime,
+            //             userAge: user.age,
+            //             userId: user._id
+            //         }
+            //     ]
+            // }
+            // await DayModel.create(date);
             res.send({ user });
+        // }
+
+    }
+
+    async update(req, res) {
+        const { _id } = req.params
+        const { body } = req
+
+        const user = await UserModel.findByIdAndUpdate(_id, body, { new: true });
+
+        res.send({ user });
+    }
+
+    async remove({ params: { _id } }, res) {
+
+        try {
+            const user = await UserModel.findById(_id)
+            if (!user) { return res.json({ message: "User does not exist" }) }
+
+            await user.remove();
+            res.json({ message: "User deleted" });
+
+        } catch (e) {
+            res.status(400).json({ message: e.message });
         }
-    }
-
-    async updateAttended(req, res) {
-        const { name } = req.params
-        const { consultationDate } = req.params
-        const { consultationTime } = req.params
-
-        const peopleOnThisDate = data.filter((dat) => dat.consultationDate === consultationDate);
-        const peopleOnThisTime = peopleOnThisDate.filter((dat) => dat.consultationTime === consultationTime)
-        const individual = peopleOnThisTime.filter((dat) => dat.name === name)
-
-        const position = data.indexOf(individual[0]);
-        data[(position)].attended = !data[(position)].attended
-        const user = data.filter((dat) => dat.name === name)
-        res.send(user)
-    }
-
-    async createConsult(req, res) {
-        const { name } = req.params
-        const { consultationDate } = req.params
-        const { consultationTime } = req.params
-
-        const peopleOnThisDate = data.filter((dat) => dat.consultationDate === consultationDate);
-        const peopleOnThisTime = peopleOnThisDate.filter((dat) => dat.consultationTime === consultationTime)
-        const individual = peopleOnThisTime.filter((dat) => dat.name === name)
-
-        const position = data.indexOf(individual[0]);
-        const { consultInfo } = req.body
-        data[(position)].consultInfo = consultInfo;
-        const user = data.filter((dat) => dat.name === name)
-        res.send(user)
     }
 
 };

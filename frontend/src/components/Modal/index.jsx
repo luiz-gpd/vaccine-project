@@ -9,9 +9,7 @@ const Modal = ({
     onClose,
     observer,
     title,
-    name,
-    date,
-    time,
+    id,
     children
 }) => {
 
@@ -32,7 +30,7 @@ const Modal = ({
         const formData = {
             consultInfo:form.information
         }
-        await api.post(`/user/${name}/${date}/${time}`, formData);
+        await api.put(`/user/${id}`, formData);
         document.location.reload();
     }
 
