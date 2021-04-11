@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema(
     {
         name: String,
         age: Number,
-        consultationDate: Date,
+        consultationDate: String,
         consultationTime: String,
         attended: Boolean,
         consultInfo: String,
