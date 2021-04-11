@@ -20,6 +20,7 @@ const Agendamento = () => {
         if (d.getMonth() + 1 < bornOn.getMonth() + 1 || (d.getMonth() + 1 === bornOn.getMonth() + 1 && d.getDate() < bornOn.getDate())) {
             idade--;
         }
+
         const user = {
             name:values.name,
             age:idade,
@@ -59,7 +60,7 @@ const Agendamento = () => {
                             <ClayInput name="name" type="text" value={values.name} placeholder="Exemplo exemplo" onChange={handleChange} />
                             <ErrorMessage name="name" />
                         </ClayForm.Group>
-                        <div display="flex">
+                        <div className="form-group-autofit"><div className="mr-6">
                         <ClayForm.Group>
                             <DatePicker
                                 b="Data de Nascimento: "
@@ -67,13 +68,16 @@ const Agendamento = () => {
                                 placeholder='01/01/2000'
                                 maxDate={new Date()}
                             />
+                        </ClayForm.Group></div>
+                        <div className="ml-6">
+                        <ClayForm.Group>
                             <DatePicker
                                 b="Data da consulta: "
                                 placeholder="01/01/2021"
                                 name="consultationDate"
                                 minDate={new Date()}
                             />
-                        </ClayForm.Group></div>
+                        </ClayForm.Group></div></div>
                         <ClayForm.Group>
                             <b>Horário da Consulta:</b>
                             <ClaySelectWithOption

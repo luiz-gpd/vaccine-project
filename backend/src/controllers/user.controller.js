@@ -1,5 +1,15 @@
-const UserModel = require("../models/user.model");
-const data = require("../database")
+const data = require("../database");
+const moment = require('moment');
+
+const whereToSave = (date, time) => {
+    for (i=0; i<data.length; i++) {
+        if(moment(date).isBefore(data[(i)].consultationDate) || (moment(date).isSame(data[(i)].consultationDate) && parseInt(time) < parseInt(data[(i)].consultationTime))) {
+            return i;
+        }
+    }
+    return (data.length)
+}
+   
 
 class User {
     async index(req, res) {
@@ -36,7 +46,8 @@ class User {
                 res.send("Já há duas pessoas nesse horário");
             }
         } else {
-            data.push(user);
+            const position = whereToSave(date, time )
+            data.splice(position , 0, user);
             res.send({ user });
         }
     }

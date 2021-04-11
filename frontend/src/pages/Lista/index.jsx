@@ -78,10 +78,10 @@ const Lista = () => {
                                     <ClayTable.Cell>{user.name}</ClayTable.Cell>
                                     <ClayTable.Cell>{user.age}</ClayTable.Cell>
                                     <ClayTable.Cell>{moment(user.consultationDate).format("DD/MM/yyyy")}</ClayTable.Cell>
-                                    <ClayTable.Cell>{user.consultationTime}</ClayTable.Cell>
+                                    <ClayTable.Cell>{user.consultationTime}:00</ClayTable.Cell>
                                     <ClayTable.Cell>
                                         <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
-                                            // disabled={(user.consultationDate > new Date()) ? "" : "anything"}
+                                            disabled={(user.consultationDate > new Date()) ? "" : "not-disabled"}
                                             toggled={user.attended}
                                             onToggle={() => onToggle(user.name, user.consultationDate, user.consultationTime)} />
                                         {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"
