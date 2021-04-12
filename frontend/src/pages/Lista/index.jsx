@@ -78,7 +78,15 @@ const Lista = () => {
                             </ClayTable.Row>
                         </ClayTable.Head>
                         <ClayTable.Body>
-                            {users.map((user, index) => (
+                            {users
+                                .sort((
+                                    (a,b) =>
+                                        (moment(a.consultationDate).isBefore(b.consultationDate)) ?
+                                        moment(a.consultationDate).diff(b.consultationDate) :
+                                        (a.consultationDate === b.consultationDate) &&
+                                        (a.consultationTime - b.consultationTime)
+                                        ))
+                                .map((user, index) => (
                                 <ClayTable.Row key={index}>
                                     <ClayTable.Cell>{user.name}</ClayTable.Cell>
                                     <ClayTable.Cell>{user.age}</ClayTable.Cell>
@@ -86,7 +94,7 @@ const Lista = () => {
                                     <ClayTable.Cell>{user.consultationTime}:00</ClayTable.Cell>
                                     <ClayTable.Cell>
                                         <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
-                                            // disabled={(user.consultationDate > new Date()) ? "" : "not-disabled"}
+                                            disabled={(user.consultationDate > new Date()) ? "" : "not-disabled"}
                                             toggled={user.attended}
                                             onToggle={() => onToggle(user._id, user.attended)} />
                                         {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"

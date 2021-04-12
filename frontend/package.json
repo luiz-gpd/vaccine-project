@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@clayui/alert": "^3.5.1",
     "@clayui/button": "^3.6.0",
     "@clayui/date-picker": "^3.25.1",
     "@clayui/form": "^3.14.4",
     "@clayui/icon": "^3.1.0",
-    "@clayui/label": "^3.4.1",
     "@clayui/layout": "^3.3.0",
     "@clayui/link": "^3.2.0",
     "@clayui/loading-indicator": "^3.2.0",
@@ -26,7 +26,6 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "react-toastify": "^7.0.3",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
   },
