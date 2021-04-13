@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import AppContext from "./AppContext";
+import React, {useReducer} from 'react'
+import AppContext, { initialState, reducer } from "./AppContext";
 
 const AppContextProvider = ({ children }) => {
-    const [toast, setToast] = useState([]);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
-        <AppContext.Provider value={{toast, setToast}}>
+        <AppContext.Provider value={[state, dispatch]}>
             { children }
         </AppContext.Provider>
     )

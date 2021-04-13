@@ -1,24 +1,16 @@
-import React, { useContext } from 'react'
-import AppContext from '../../AppContext'
+import React from 'react'
 import ClayAlert from '@clayui/alert'
 
-const Toast = ({children, title, type}) => {
+const Toast = ({children, title, type, toast, onClose}) => {
     
-    const {toast, setToast} = useContext(AppContext);
-    
-    //  {setToastItems([...toastItems, Math.random() * 100])}
     return (
         
         <ClayAlert.ToastContainer>
-            {toast.map(value => (
+            {toast.map((value ,index) => (
                 <ClayAlert
                     autoClose={5000}
-                    key={value}
-                    onClose={() => {
-                        setToast(prevItems =>
-                            prevItems.filter(item => item !== value)
-                        );
-                    }}
+                    key={index}
+                    onClose={onClose}
                     role="alert"
                     displayType={type}
                     title={title}

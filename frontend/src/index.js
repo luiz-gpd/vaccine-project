@@ -8,11 +8,9 @@ import {ClayIconSpriteContext} from '@clayui/icon';
 import spritemap from './utils/images/icons.svg'
 
 ReactDOM.render(
-  <React.StrictMode>
     <ClayIconSpriteContext.Provider value={spritemap}>
       <App />
-      </ClayIconSpriteContext.Provider>
-  </React.StrictMode>,
+      </ClayIconSpriteContext.Provider>,
   document.getElementById('root')
 );
 reportWebVitals();

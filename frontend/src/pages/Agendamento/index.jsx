@@ -11,9 +11,7 @@ import api from '../../utils/api'
 import Toast from '../../components/Toast'
 
 const Agendamento = () => {
-    
-
-    const {toast, setToast} = useContext(AppContext);
+    const [{ toast }, dispatch] = useContext(AppContext);
     
     const [state, setState] = useState(true);
 
@@ -39,12 +37,19 @@ const Agendamento = () => {
 
         try {
             const response = await api.post('/user', user)
+            const bla = Math.random() * 100
             if (response.data === "Já há duas pessoas nesse horário") {
                 setState(false);
-                setToast([...toast, Math.random() * 100])
-            } else {
-                setState(true);
-                setToast([...toast, Math.random() * 100])
+                dispatch({
+                    type: "SHOW_TOAST",
+                    payload: { bla },
+                  });
+                } else {
+                    setState(true);
+                    dispatch({
+                        type: "SHOW_TOAST",
+                        payload: { bla },
+                      }); 
             }
         } catch (e) {
             alert(e.response.data.message);
@@ -74,7 +79,6 @@ const Agendamento = () => {
                                 <DatePicker
                                     b="Data de Nascimento: "
                                     name="birthDate"
-                                    placeholder='01/01/2000'
                                     maxDate={new Date()}
                                 />
                             </ClayForm.Group></div>
@@ -82,7 +86,6 @@ const Agendamento = () => {
                                 <ClayForm.Group>
                                     <DatePicker
                                         b="Data da consulta: "
-                                        placeholder="01/01/2021"
                                         name="consultationDate"
                                         minDate={new Date()}
                                     />
@@ -102,6 +105,13 @@ const Agendamento = () => {
                 )}
             </Formik>
             <Toast title={state ? "Pronto!" : "Erro"}
+            onClose={() => {
+                dispatch({
+                    type: "HIDE_TOAST",
+                    payload: { data: "" },
+                  });
+            }}
+            toast={toast}
             type={state ? "success" : "danger"}
             >{state ? "Cadastro realizado com successo!" : "Já há duas pessoas nesse horário!"}</Toast>
         </Page>

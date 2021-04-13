@@ -23,6 +23,7 @@ function DatePicker (props) {
               showYearDropdown
               scrollableMonthYearDropdown
               placeholderText="00/00/0000"
+              autoComplete="off"
             />
           )
         }}

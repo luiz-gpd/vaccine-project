@@ -3,8 +3,8 @@ import Page from '../../components/Page'
 import api from '../../utils/api'
 import ClayTable from '@clayui/table'
 import ClayLoadingIndicator from '@clayui/loading-indicator'
-import {ClayPaginationWithBasicItems} from '@clayui/pagination';
-import { ClayToggle } from '@clayui/form'
+import { ClayPaginationWithBasicItems } from '@clayui/pagination';
+import { ClayToggle, ClayInput } from '@clayui/form'
 import { useModal } from '@clayui/modal'
 import { ClayButtonWithIcon } from '@clayui/button'
 import Modal from '../../components/Modal'
@@ -20,13 +20,14 @@ const Lista = () => {
     }
 
     const [users, setUsers] = useState([])
+    const [search, setSearch] = useState("")
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
     const [form, setForm] = useState(initialState);
     const { observer, onClose } = useModal({
         onClose: () => setVisible(false),
     });
-    
+
     const getUsers = () => {
         setLoading(true);
         api.get('/user').then((response) => {
@@ -69,13 +70,21 @@ const Lista = () => {
                 <ClayLoadingIndicator />
             ) : (
                 <>
-                    <ClayPaginationWithBasicItems
+                    <ClayInput className="mt-4"
+                        value={search}
+                        name="search"
+                        type="text"
+                        placeholder="Pesquisar..."
+                        onChange={(event) => {setSearch(event.target.value)}}
+                    />
+                    {pagesTotal && <ClayPaginationWithBasicItems
+                        className="mt-2"
                         activePage={pageNumber}
                         ellipsisBuffer={2}
                         onPageChange={setPageNumber}
-                        totalPages={pagesTotal} 
-                    />
-                    <ClayTable className="mt-4">
+                        totalPages={pagesTotal}
+                    />}
+                    <ClayTable className="mt-2">
                         <ClayTable.Head>
                             <ClayTable.Row>
                                 <ClayTable.Cell headingCell>Nome</ClayTable.Cell>
@@ -86,7 +95,14 @@ const Lista = () => {
                             </ClayTable.Row>
                         </ClayTable.Head>
                         <ClayTable.Body>
-                            {users
+                            {// eslint-disable-next-line array-callback-return
+                            users.filter((user)=> {
+                                    if (search === "") {
+                                        return user;
+                                    } else if(user.name.toLowerCase().includes(search.toLowerCase())) {
+                                        return user;
+                                    }
+                                })
                                 .sort((
                                     (a, b) =>
                                         (moment(a.consultationDate).isBefore(b.consultationDate)) ?
@@ -95,15 +111,15 @@ const Lista = () => {
                                             (a.consultationTime - b.consultationTime)
                                 ))
                                 .slice(pagesVisited - usersPerPage, pagesVisited)
-                                .map((user, index) => (
-                                    <ClayTable.Row key={index}>
+                                .map((user, key) => (
+                                    <ClayTable.Row key={key}>
                                         <ClayTable.Cell>{user.name}</ClayTable.Cell>
                                         <ClayTable.Cell>{user.age}</ClayTable.Cell>
                                         <ClayTable.Cell>{moment(user.consultationDate).format("DD/MM/yyyy")}</ClayTable.Cell>
                                         <ClayTable.Cell>{user.consultationTime}:00</ClayTable.Cell>
                                         <ClayTable.Cell>
                                             <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
-                                                disabled={(user.consultationDate > new Date()) ? "" : "not-disabled"}
+                                                disabled={(moment(user.consultationDate).isBefore(new Date())) ? false : true}
                                                 toggled={user.attended}
                                                 onToggle={() => onToggle(user._id, user.attended)} />
                                             {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"
