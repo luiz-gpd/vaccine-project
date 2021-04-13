@@ -10,7 +10,7 @@ const Routes = () => {
             <NavigationBar/>
             <Switch>
                 <Route path='/' exact component={Agendamento}/>
-                <Route path='/lista' exact component={Lista}/>
+                <Route path='/list' exact component={Lista}/>
             </Switch>
         </BrowserRouter>
     )

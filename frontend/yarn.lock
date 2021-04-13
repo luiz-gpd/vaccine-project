@@ -1253,6 +1253,18 @@
     react-transition-group "^4.4.1"
     warning "^4.0.3"
 
+"@clayui/pagination@^3.25.1":
+  version "3.25.1"
+  resolved "https://registry.yarnpkg.com/@clayui/pagination/-/pagination-3.25.1.tgz#f71ec348d2574ca7568bd13cfc51fc7e69abd870"
+  integrity sha512-H06HNuvs8ablF8ga9Pxk5xEidUstVra8VRTG0fgZg1VLm3xh9dKrSZ2KXy7cc0vnyEm5k+7WmfJosk6qCXhnKA==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/drop-down" "^3.25.1"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/link" "^3.2.0"
+    "@clayui/shared" "^3.5.1"
+    classnames "^2.2.6"
+
 "@clayui/shared@^3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@clayui/shared/-/shared-3.5.1.tgz#6daee67b300f346381dd126472802f0a83472c4c"

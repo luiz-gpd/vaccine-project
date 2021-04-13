@@ -17,7 +17,7 @@ const NavigationBar = () => {
         {
           component: Lista,
           name: 'Lista',
-          path: '/lista',
+          path: '/list',
           private: false
         },
         

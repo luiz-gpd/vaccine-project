@@ -22,6 +22,7 @@ function DatePicker (props) {
               dateFormat="dd/MM/yyyy"
               showYearDropdown
               scrollableMonthYearDropdown
+              placeholderText="00/00/0000"
             />
           )
         }}

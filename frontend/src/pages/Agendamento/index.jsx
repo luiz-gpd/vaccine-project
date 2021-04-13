@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Page from '../../components/Page'
 import { Formik, ErrorMessage, Form } from 'formik'
 import schema from '../../utils/schema'
@@ -11,8 +11,11 @@ import api from '../../utils/api'
 import Toast from '../../components/Toast'
 
 const Agendamento = () => {
+    
 
     const {toast, setToast} = useContext(AppContext);
+    
+    const [state, setState] = useState(true);
 
     const onSubmit = async (values) => {
 
@@ -37,9 +40,11 @@ const Agendamento = () => {
         try {
             const response = await api.post('/user', user)
             if (response.data === "Já há duas pessoas nesse horário") {
+                setState(false);
                 setToast([...toast, Math.random() * 100])
             } else {
-                setToast(toast)
+                setState(true);
+                setToast([...toast, Math.random() * 100])
             }
         } catch (e) {
             alert(e.response.data.message);
@@ -96,9 +101,9 @@ const Agendamento = () => {
                     </Form>
                 )}
             </Formik>
-            <Toast title="Pronto!"
-            type="alert alert-dismissible alert-success"
-            >Cadastro realizado com successo!</Toast>
+            <Toast title={state ? "Pronto!" : "Erro"}
+            type={state ? "success" : "danger"}
+            >{state ? "Cadastro realizado com successo!" : "Já há duas pessoas nesse horário!"}</Toast>
         </Page>
     )
 }

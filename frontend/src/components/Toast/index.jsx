@@ -2,12 +2,13 @@ import React, { useContext } from 'react'
 import AppContext from '../../AppContext'
 import ClayAlert from '@clayui/alert'
 
-const Toast = (children, title, type) => {
+const Toast = ({children, title, type}) => {
     
     const {toast, setToast} = useContext(AppContext);
     
     //  {setToastItems([...toastItems, Math.random() * 100])}
     return (
+        
         <ClayAlert.ToastContainer>
             {toast.map(value => (
                 <ClayAlert
@@ -18,7 +19,8 @@ const Toast = (children, title, type) => {
                             prevItems.filter(item => item !== value)
                         );
                     }}
-                    className={type}
+                    role="alert"
+                    displayType={type}
                     title={title}
                 >{children}</ClayAlert>
             ))}

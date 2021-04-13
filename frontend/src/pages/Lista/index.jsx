@@ -3,6 +3,7 @@ import Page from '../../components/Page'
 import api from '../../utils/api'
 import ClayTable from '@clayui/table'
 import ClayLoadingIndicator from '@clayui/loading-indicator'
+import {ClayPaginationWithBasicItems} from '@clayui/pagination';
 import { ClayToggle } from '@clayui/form'
 import { useModal } from '@clayui/modal'
 import { ClayButtonWithIcon } from '@clayui/button'
@@ -12,20 +13,20 @@ import moment from 'moment'
 const Lista = () => {
 
     const initialState = {
-        name:"",
-        consultationDate:"",
-        consultationTime:"",
-        consultInfo:"",
+        name: "",
+        consultationDate: "",
+        consultationTime: "",
+        consultInfo: "",
     }
 
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(false);
-    const [visible, setVisible] = useState(false);  
+    const [visible, setVisible] = useState(false);
     const [form, setForm] = useState(initialState);
     const { observer, onClose } = useModal({
         onClose: () => setVisible(false),
     });
-
+    
     const getUsers = () => {
         setLoading(true);
         api.get('/user').then((response) => {
@@ -36,30 +37,31 @@ const Lista = () => {
         });
         setLoading(false);
     };
-    
+
     useEffect(() => {
         getUsers();
     }, [])
-    
+
     const onToggle = async (id, attended) => {
         const formData = {
-            attended:!attended
+            attended: !attended
         }
         await api.put(`/user/${id}`, formData);
         getUsers();
     }
-    
-    const getModalInfo = ( id, info ) => {
+
+    const getModalInfo = (id, info) => {
         setVisible(true);
         setForm({
-            _id:id,
-            consultInfo:info
+            _id: id,
+            consultInfo: info
         })
     }
-    
-    // const compare = (a, b) => {
-    //     return (parseInt(a) - parseInt(b));
-    // }
+
+    const [pageNumber, setPageNumber] = useState(1)
+    const usersPerPage = 10;
+    const pagesVisited = pageNumber * usersPerPage;
+    const pagesTotal = Math.ceil(users.length / usersPerPage)
 
     return (
         <Page title="Lista de Agendamentos">
@@ -67,7 +69,13 @@ const Lista = () => {
                 <ClayLoadingIndicator />
             ) : (
                 <>
-                    <ClayTable>
+                    <ClayPaginationWithBasicItems
+                        activePage={pageNumber}
+                        ellipsisBuffer={2}
+                        onPageChange={setPageNumber}
+                        totalPages={pagesTotal} 
+                    />
+                    <ClayTable className="mt-4">
                         <ClayTable.Head>
                             <ClayTable.Row>
                                 <ClayTable.Cell headingCell>Nome</ClayTable.Cell>
@@ -80,29 +88,30 @@ const Lista = () => {
                         <ClayTable.Body>
                             {users
                                 .sort((
-                                    (a,b) =>
+                                    (a, b) =>
                                         (moment(a.consultationDate).isBefore(b.consultationDate)) ?
-                                        moment(a.consultationDate).diff(b.consultationDate) :
-                                        (a.consultationDate === b.consultationDate) &&
-                                        (a.consultationTime - b.consultationTime)
-                                        ))
+                                            moment(a.consultationDate).diff(b.consultationDate) :
+                                            (a.consultationDate === b.consultationDate) &&
+                                            (a.consultationTime - b.consultationTime)
+                                ))
+                                .slice(pagesVisited - usersPerPage, pagesVisited)
                                 .map((user, index) => (
-                                <ClayTable.Row key={index}>
-                                    <ClayTable.Cell>{user.name}</ClayTable.Cell>
-                                    <ClayTable.Cell>{user.age}</ClayTable.Cell>
-                                    <ClayTable.Cell>{moment(user.consultationDate).format("DD/MM/yyyy")}</ClayTable.Cell>
-                                    <ClayTable.Cell>{user.consultationTime}:00</ClayTable.Cell>
-                                    <ClayTable.Cell>
-                                        <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
-                                            disabled={(user.consultationDate > new Date()) ? "" : "not-disabled"}
-                                            toggled={user.attended}
-                                            onToggle={() => onToggle(user._id, user.attended)} />
-                                        {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"
-                                        symbol="comments" onClick={() => getModalInfo(user._id, user.consultInfo)}/>}
-                                    </ClayTable.Cell>
-                                </ClayTable.Row>
+                                    <ClayTable.Row key={index}>
+                                        <ClayTable.Cell>{user.name}</ClayTable.Cell>
+                                        <ClayTable.Cell>{user.age}</ClayTable.Cell>
+                                        <ClayTable.Cell>{moment(user.consultationDate).format("DD/MM/yyyy")}</ClayTable.Cell>
+                                        <ClayTable.Cell>{user.consultationTime}:00</ClayTable.Cell>
+                                        <ClayTable.Cell>
+                                            <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
+                                                disabled={(user.consultationDate > new Date()) ? "" : "not-disabled"}
+                                                toggled={user.attended}
+                                                onToggle={() => onToggle(user._id, user.attended)} />
+                                            {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"
+                                                symbol="comments" onClick={() => getModalInfo(user._id, user.consultInfo)} />}
+                                        </ClayTable.Cell>
+                                    </ClayTable.Row>
 
-                            ))}
+                                ))}
                         </ClayTable.Body>
                     </ClayTable>
                     <Modal
@@ -111,8 +120,8 @@ const Lista = () => {
                         observer={observer}
                         title="Dados da consulta"
                         id={form._id}
-                        >{form.consultInfo}
-            </Modal>
+                    >{form.consultInfo}
+                    </Modal>
                 </>)}
         </Page>
     )
