@@ -2,7 +2,7 @@ import React from 'react'
 import ClayLayout from '@clayui/layout'
 import VaciCuidar_logo from '../../utils/images/VaciCuidar_logo.png'
 
-export default function index({ title, children }) {
+const Page = ({ title, children }) => {
     return (
         <ClayLayout.Container className="mt-4">
             <ClayLayout.Row justify="between">
@@ -17,3 +17,5 @@ export default function index({ title, children }) {
         </ClayLayout.Container>
     )
 }
+
+export default Page;

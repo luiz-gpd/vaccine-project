@@ -27,8 +27,8 @@ function DatePicker (props) {
             />
           )
         }}
-      </Field>
-      <ErrorMessage name={name} />
+      </Field><br/>
+      <ErrorMessage className="error" name={name} />
     </div>
   )
 }

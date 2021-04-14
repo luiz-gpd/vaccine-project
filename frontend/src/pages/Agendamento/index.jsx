@@ -12,16 +12,13 @@ import Toast from '../../components/Toast'
 
 const Agendamento = () => {
     const [{ toast }, dispatch] = useContext(AppContext);
-    
-    const [state, setState] = useState(true);
+    const [toastType, setToastType] = useState(true);
 
     const onSubmit = async (values) => {
 
         const bornOn = values.birthDate;
         const d = new Date();
-
         var idade = d.getFullYear() - bornOn.getYear() - 1900;
-
         if (d.getMonth() + 1 < bornOn.getMonth() + 1 || (d.getMonth() + 1 === bornOn.getMonth() + 1 && d.getDate() < bornOn.getDate())) {
             idade--;
         }
@@ -37,18 +34,18 @@ const Agendamento = () => {
 
         try {
             const response = await api.post('/user', user)
-            const bla = Math.random() * 100
+            const value = Math.random() * 100
             if (response.data === "Já há duas pessoas nesse horário") {
-                setState(false);
+                setToastType(false);
                 dispatch({
                     type: "SHOW_TOAST",
-                    payload: { bla },
+                    payload: { value },
                   });
                 } else {
-                    setState(true);
+                    setToastType(true);
                     dispatch({
                         type: "SHOW_TOAST",
-                        payload: { bla },
+                        payload: { value },
                       }); 
             }
         } catch (e) {
@@ -58,6 +55,7 @@ const Agendamento = () => {
 
     return (
         <Page title="Realize seu Agendamento">
+            <div className="rectangle">
             <Formik
                 validationSchema={schema}
                 onSubmit={onSubmit}
@@ -104,16 +102,17 @@ const Agendamento = () => {
                     </Form>
                 )}
             </Formik>
-            <Toast title={state ? "Pronto!" : "Erro"}
+            </div>
+            <Toast title={toastType ? "Pronto!" : "Erro"}
             onClose={() => {
                 dispatch({
                     type: "HIDE_TOAST",
                     payload: { data: "" },
-                  });
+                });
             }}
             toast={toast}
-            type={state ? "success" : "danger"}
-            >{state ? "Cadastro realizado com successo!" : "Já há duas pessoas nesse horário!"}</Toast>
+            type={toastType ? "success" : "danger"}
+            >{toastType ? "Cadastro realizado com successo!" : "Já há duas pessoas nesse horário!"}</Toast>
         </Page>
     )
 }

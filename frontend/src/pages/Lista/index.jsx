@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Page from '../../components/Page'
 import api from '../../utils/api'
-import ClayTable from '@clayui/table'
 import ClayLoadingIndicator from '@clayui/loading-indicator'
 import { ClayPaginationWithBasicItems } from '@clayui/pagination';
 import { ClayToggle, ClayInput } from '@clayui/form'
@@ -9,21 +8,17 @@ import { useModal } from '@clayui/modal'
 import { ClayButtonWithIcon } from '@clayui/button'
 import Modal from '../../components/Modal'
 import moment from 'moment'
+// import CONTAINER from '../../components/List/'
+import  '../../components/List/List.scss'
+
 
 const Lista = () => {
-
-    const initialState = {
-        name: "",
-        consultationDate: "",
-        consultationTime: "",
-        consultInfo: "",
-    }
 
     const [users, setUsers] = useState([])
     const [search, setSearch] = useState("")
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
-    const [form, setForm] = useState(initialState);
+    const [form, setForm] = useState([]);
     const { observer, onClose } = useModal({
         onClose: () => setVisible(false),
     });
@@ -66,6 +61,7 @@ const Lista = () => {
 
     return (
         <Page title="Lista de Agendamentos">
+            <div className="get-white">
             {loading ? (
                 <ClayLoadingIndicator />
             ) : (
@@ -84,17 +80,17 @@ const Lista = () => {
                         onPageChange={setPageNumber}
                         totalPages={pagesTotal}
                     />}
-                    <ClayTable className="mt-2">
-                        <ClayTable.Head>
-                            <ClayTable.Row>
-                                <ClayTable.Cell headingCell>Nome</ClayTable.Cell>
-                                <ClayTable.Cell headingCell>Idade</ClayTable.Cell>
-                                <ClayTable.Cell headingCell>Data da Vacina</ClayTable.Cell>
-                                <ClayTable.Cell headingCell>Horário da Vacina</ClayTable.Cell>
-                                <ClayTable.Cell headingCell>Atendimento</ClayTable.Cell>
-                            </ClayTable.Row>
-                        </ClayTable.Head>
-                        <ClayTable.Body>
+                    <table className="content-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>Data da Vacina</th>
+                                <th>Horário da Vacina</th>
+                                <th>Atendimento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {// eslint-disable-next-line array-callback-return
                             users.filter((user)=> {
                                     if (search === "") {
@@ -112,24 +108,24 @@ const Lista = () => {
                                 ))
                                 .slice(pagesVisited - usersPerPage, pagesVisited)
                                 .map((user, key) => (
-                                    <ClayTable.Row key={key}>
-                                        <ClayTable.Cell>{user.name}</ClayTable.Cell>
-                                        <ClayTable.Cell>{user.age}</ClayTable.Cell>
-                                        <ClayTable.Cell>{moment(user.consultationDate).format("DD/MM/yyyy")}</ClayTable.Cell>
-                                        <ClayTable.Cell>{user.consultationTime}:00</ClayTable.Cell>
-                                        <ClayTable.Cell>
+                                    <tr key={key}>
+                                        <td>{user.name}</td>
+                                        <td>{user.age}</td>
+                                        <td>{moment(user.consultationDate).format("DD/MM/yyyy")}</td>
+                                        <td>{user.consultationTime}:00</td>
+                                        <td>
                                             <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
                                                 disabled={(moment(user.consultationDate).isBefore(new Date())) ? false : true}
                                                 toggled={user.attended}
                                                 onToggle={() => onToggle(user._id, user.attended)} />
                                             {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"
                                                 symbol="comments" onClick={() => getModalInfo(user._id, user.consultInfo)} />}
-                                        </ClayTable.Cell>
-                                    </ClayTable.Row>
+                                        </td>
+                                    </tr>
 
                                 ))}
-                        </ClayTable.Body>
-                    </ClayTable>
+                        </tbody>
+                    </table>
                     <Modal
                         visible={visible}
                         onClose={onClose}
@@ -139,6 +135,7 @@ const Lista = () => {
                     >{form.consultInfo}
                     </Modal>
                 </>)}
+                </div>
         </Page>
     )
 }

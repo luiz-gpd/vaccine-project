@@ -11,7 +11,7 @@ const NavigationBar = () => {
         {
           component: Agendamento,
           name: 'Agendamento',
-          path: '/',
+          path: '/user',
           private: false
         },
         {
