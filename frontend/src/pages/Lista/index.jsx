@@ -61,7 +61,6 @@ const Lista = () => {
 
     return (
         <Page title="Lista de Agendamentos">
-            <div className="get-white">
             {loading ? (
                 <ClayLoadingIndicator />
             ) : (
@@ -117,7 +116,7 @@ const Lista = () => {
                                             <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
                                                 disabled={(moment(user.consultationDate).isBefore(new Date())) ? false : true}
                                                 toggled={user.attended}
-                                                onToggle={() => onToggle(user._id, user.attended)} />
+                                                onToggle={() => onToggle(user._id, user.attended)}/>
                                             {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"
                                                 symbol="comments" onClick={() => getModalInfo(user._id, user.consultInfo)} />}
                                         </td>
@@ -135,7 +134,6 @@ const Lista = () => {
                     >{form.consultInfo}
                     </Modal>
                 </>)}
-                </div>
         </Page>
     )
 }

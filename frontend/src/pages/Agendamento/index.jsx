@@ -55,7 +55,6 @@ const Agendamento = () => {
 
     return (
         <Page title="Realize seu Agendamento">
-            <div className="rectangle">
             <Formik
                 validationSchema={schema}
                 onSubmit={onSubmit}
@@ -102,7 +101,6 @@ const Agendamento = () => {
                     </Form>
                 )}
             </Formik>
-            </div>
             <Toast title={toastType ? "Pronto!" : "Erro"}
             onClose={() => {
                 dispatch({
