@@ -5,12 +5,13 @@ import Agendamento from './pages/Agendamento';
 import Home from './pages/Home';
 import Lista from './pages/Lista';
 
-const Routes = () => {
+const Routes = (props) => {
+
     return (
         <BrowserRouter>
-            <NavigationBar/>
+        <NavigationBar/>
             <Switch>
-                <Route className="homePage" path='/' exact component={Home}/>
+                <Route path='/' exact component={Home}/>
                 <Route path='/user' exact component={Agendamento}/>
                 <Route path='/list' exact component={Lista}/>
             </Switch>

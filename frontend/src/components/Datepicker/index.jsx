@@ -2,9 +2,14 @@ import React from 'react'
 import DateView from 'react-datepicker'
 import { Field, ErrorMessage } from 'formik'
 import 'react-datepicker/dist/react-datepicker.css'
+import { registerLocale }from 'react-datepicker'
+import pt from "date-fns/locale/pt";
 
 function DatePicker (props) {
+  
   const { b, name, ...rest } = props
+  registerLocale("pt", pt)
+
   return (
     <div className='form-control'>
       <b htmlFor={name}>{b}</b><br/>
@@ -24,6 +29,7 @@ function DatePicker (props) {
               scrollableMonthYearDropdown
               placeholderText="00/00/0000"
               autoComplete="off"
+              locale="pt"
             />
           )
         }}

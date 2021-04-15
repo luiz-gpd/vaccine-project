@@ -5,7 +5,7 @@ import Page from '../../components/Page'
 const Home = ( {history} ) => {
     
     return (
-        <div className="background-img">
+        <div id="container">
         <Page>
             <h1 className="welcome">Bem Vindo!</h1>
             <h2 className="mt-4">Devemos nos cuidar sempre!</h2>

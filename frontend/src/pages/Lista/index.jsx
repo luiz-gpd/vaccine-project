@@ -8,8 +8,6 @@ import { useModal } from '@clayui/modal'
 import { ClayButtonWithIcon } from '@clayui/button'
 import Modal from '../../components/Modal'
 import moment from 'moment'
-// import CONTAINER from '../../components/List/'
-import  '../../components/List/List.scss'
 
 
 const Lista = () => {
@@ -103,7 +101,7 @@ const Lista = () => {
                                         (moment(a.consultationDate).isBefore(b.consultationDate)) ?
                                             moment(a.consultationDate).diff(b.consultationDate) :
                                             (a.consultationDate === b.consultationDate) &&
-                                            (a.consultationTime - b.consultationTime)
+                                            (moment(moment(a.consultationTime, "HH:mm")).diff(moment(b.consultationTime, "HH:mm")))
                                 ))
                                 .slice(pagesVisited - usersPerPage, pagesVisited)
                                 .map((user, key) => (
@@ -111,7 +109,7 @@ const Lista = () => {
                                         <td>{user.name}</td>
                                         <td>{user.age}</td>
                                         <td>{moment(user.consultationDate).format("DD/MM/yyyy")}</td>
-                                        <td>{user.consultationTime}:00</td>
+                                        <td>{user.consultationTime}</td>
                                         <td>
                                             <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
                                                 disabled={(moment(user.consultationDate).isBefore(new Date())) ? false : true}

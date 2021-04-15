@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { Prompt } from 'react-router'
 import Page from '../../components/Page'
 import { Formik, ErrorMessage, Form } from 'formik'
 import schema from '../../utils/schema'
@@ -10,9 +11,19 @@ import DatePicker from '../../components/Datepicker'
 import api from '../../utils/api'
 import Toast from '../../components/Toast'
 
+
 const Agendamento = () => {
     const [{ toast }, dispatch] = useContext(AppContext);
     const [toastType, setToastType] = useState(true);
+
+    useEffect(() => {
+        window.onbeforeunload = function () {
+          return true;
+        };
+        return () => {
+          window.onbeforeunload = null;
+        };
+      }, []);
 
     const onSubmit = async (values) => {
 
@@ -64,8 +75,11 @@ const Agendamento = () => {
                     consultationDate: '',
                     consultationTime: '',
                 }}>
-                {({ values, handleChange, handleSubmit }) => (
+                {({ values, handleChange, handleSubmit, dirty }) => (
                     <Form className="mt-6" onSubmit={handleSubmit}>
+                        <Prompt 
+                        when={dirty}
+                        message="Você tem alterações não salvas, deseja mesmo mesmo sair?"/>
                         <ClayForm.Group>
                             <b>Nome:</b>
                             <ClayInput name="name" type="text" value={values.name} placeholder="Exemplo exemplo" onChange={handleChange} />
@@ -111,7 +125,7 @@ const Agendamento = () => {
             toast={toast}
             type={toastType ? "success" : "danger"}
             >{toastType ? "Cadastro realizado com successo!" : "Já há duas pessoas nesse horário!"}</Toast>
-        </Page>
+        </Page> 
     )
 }
 

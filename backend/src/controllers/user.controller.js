@@ -1,4 +1,3 @@
-const moment = require('moment');
 const UserModel = require("../models/user.model");
 
 class User {
