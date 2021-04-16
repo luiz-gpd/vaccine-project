@@ -4,6 +4,12 @@ const AppContext = createContext();
 
 const initialState = {
     toast: [],
+    search: "",
+    modalInfo: {
+      userId: "",
+      info: "",
+      visible: false
+    }
   };
   
   const reducer = (state, action) => {
@@ -20,6 +26,20 @@ const initialState = {
           ...state,
           toast: [],
 
+        };
+      }
+
+      case "USE_SEARCH": {
+        return {
+          ...state,
+          search: action.payload,
+        };
+      }
+
+      case "SET_MODAL": {
+        return {
+          ...state,
+          modalInfo: action.payload,
         };
       }
 

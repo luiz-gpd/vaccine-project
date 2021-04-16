@@ -28,8 +28,7 @@ class User {
                 }
                 res.send(user);
             } else {
-                res.send("Já há duas pessoas nesse horário")
-            }
+                res.send("Error on post")            }
         } else {
 
             const user = await UserModel.create(body);
@@ -51,10 +50,10 @@ class User {
 
         try {
             const user = await UserModel.findById(_id)
-            if (!user) { return res.json({ message: "User does not exist" }) }
+            if (!user) { return res.json({ message: "Usuário inexistente" }) }
 
             await user.remove();
-            res.json({ message: "User deleted" });
+            res.json({ message: "Usuário removido" });
 
         } catch (e) {
             res.status(400).json({ message: e.message });

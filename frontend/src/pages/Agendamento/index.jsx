@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Prompt } from 'react-router'
 import Page from '../../components/Page'
 import { Formik, ErrorMessage, Form } from 'formik'
-import schema from '../../utils/schema'
+import schema from '../../components/Agendamento/schema'
 import ClayForm, { ClayInput, ClaySelectWithOption } from '@clayui/form'
 import ClayButton from '@clayui/button'
 import options from '../../components/Agendamento/options'
@@ -46,7 +46,7 @@ const Agendamento = () => {
         try {
             const response = await api.post('/user', user)
             const value = Math.random() * 100
-            if (response.data === "Já há duas pessoas nesse horário") {
+            if (response.data === "Error on post") {
                 setToastType(false);
                 dispatch({
                     type: "SHOW_TOAST",

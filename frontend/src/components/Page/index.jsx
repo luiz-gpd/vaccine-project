@@ -1,6 +1,6 @@
 import React from 'react'
 import ClayLayout from '@clayui/layout'
-import VaciCuidar_logo from '../../utils/images/VaciCuidar_logo.png'
+import VaciCuidar_logo from '../../images/VaciCuidar_logo.png'
 
 const Page = ({ title, children }) => {
     return (

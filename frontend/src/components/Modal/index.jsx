@@ -16,7 +16,7 @@ const Modal = ({
     const initialState = {
         information:""
     }
-    const [state, setState] = useState(false)
+    const [showChanger, setShowChanger] = useState(false)
     const [form, setForm] = useState(initialState)
     
     const onChange = ({ target: { name, value } }) => {
@@ -48,8 +48,8 @@ const Modal = ({
                     </ClayModal.Body>
                     <ClayModal.Footer
                         first={<>
-                                <ClayButton displayType="secondary" onClick={setState}>Alterar</ClayButton>
-                                {state && (<><ClayInput name="information" className="mt-4 mb-2" value={form.information} onChange={onChange}/>
+                                <ClayButton displayType="secondary" onClick={setShowChanger}>Alterar</ClayButton>
+                                {showChanger && (<><ClayInput name="information" className="mt-4 mb-2" value={form.information} onChange={onChange}/>
                                 <ClayButton displayType="primary" onClick={onClick}>Salvar</ClayButton></>)}
                         </>}
                         last={<ClayButton className="btn btn-danger" onClick={onClose}>Fechar</ClayButton>}
