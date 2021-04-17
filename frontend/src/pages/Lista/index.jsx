@@ -48,7 +48,7 @@ const Lista = () => {
 
     return (
         <Page title="Lista de Agendamentos">
-                <>
+               {users.length !== 0 ? ( <>
                     <ClayInput className="mt-4"
                         value={search}
                         name="search"
@@ -79,6 +79,7 @@ const Lista = () => {
                         {modalInfo.info}
                     </Modal>
                 </>
+            ) : <span> Não há nenhuma consulta agendada</span>}
         </Page>
     )
 }

@@ -29,8 +29,8 @@ const NavigationBar = () => {
   return (
     <ClayNavigationBar triggerLabel="Site Pitang">
       {routes.map(({ name, path }) => (
-        <ClayNavigationBar.Item key={path} active={path === location.pathname}>
-          <ClayLink onClick={() => history.push(path)} className="nav-link" displayType="unstyled">
+        <ClayNavigationBar.Item key={path} className="dynamic-route" active={path === location.pathname}>
+          <ClayLink data-testid="link" onClick={() => history.push(path)} className="nav-link" displayType="unstyled">
             {name}
           </ClayLink>
         </ClayNavigationBar.Item>
