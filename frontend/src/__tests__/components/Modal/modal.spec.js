@@ -1,27 +1,40 @@
-import Modal from '../../../components/Modal'
+import Modal from '../../../components/Modal/index'
 
-import { render, fireEvent } from "@testing-library/react";
+import AppContext, { initialState } from '../../../AppContext'
+
+import { render, waitFor, fireEvent, screen } from "@testing-library/react";
+
+const ModalWrapper = ({ state = initialState, dispatch }) => (
+    <AppContext.Provider value={[state, dispatch]}>
+            <Modal />
+    </AppContext.Provider>
+);
 
 describe("Modal component", () => {
     it("renders", () => {
-        const { asFragment } = render(<Modal />)
+        const { asFragment } = render(<ModalWrapper/>)
 
         expect(asFragment()).toMatchSnapshot();
     });
 
-    it("renders with context data", () => {
-        const { queryByText } = render(
-            <Modal visible={false}
-            // onClose=
-            // observer=
-            title="modal1"
-            id="modal1"
-            >Tudo bem</Modal>
-        );
+    it("Should change when writing on the input", async () => {
+        
+        const { queryByTestId } = render(<ModalWrapper 
+        visible={true}
+        />)
 
-        // const savingButton = queryByText("Salvar");
+        // const fieldNode = await waitFor(
+        //     () => queryByTestId('formField')
+        // ) 
+        // fireEvent.change(
+        //     fieldNode,
+        //     { target: { value: 'test'}}
+        // )
 
-        // fireEvent.click(savingButton)
+        // expect(fieldNode.value).toEqual(test)
 
-    })
+        const btnNode = await waitFor(() => queryByTestId('formButtonSave'))
+        fireEvent.click(btnNode);
+
+    });
 });

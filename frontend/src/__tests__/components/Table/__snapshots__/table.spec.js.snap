@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table Component renders 1`] = `
+<DocumentFragment>
+  <table
+    class="content-table"
+  >
+    <thead>
+      <tr>
+        <th>
+          Nome
+        </th>
+        <th>
+          Idade
+        </th>
+        <th>
+          Data da Vacina
+        </th>
+        <th>
+          Horário da Vacina
+        </th>
+        <th>
+          Atendimento
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</DocumentFragment>
+`;

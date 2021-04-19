@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NavigationBar renders 1`] = `
+exports[`NavigationBar component renders 1`] = `
 <DocumentFragment>
   <nav
     class="navbar navbar-collapse-absolute navbar-expand-md navbar-underline navigation-bar navigation-bar-light"
@@ -41,7 +41,7 @@ exports[`NavigationBar renders 1`] = `
             >
               <a
                 class="nav-link link-unstyled"
-                data-testid="link"
+                data-testid="Agendamento"
               >
                 Agendamento
               </a>
@@ -51,7 +51,7 @@ exports[`NavigationBar renders 1`] = `
             >
               <a
                 class="nav-link link-unstyled"
-                data-testid="link"
+                data-testid="Lista"
               >
                 Lista
               </a>

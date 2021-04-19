@@ -83,7 +83,7 @@ const Table = ( { usersPerPage, pageNumber } ) => {
                                                 disabled={(moment(user.consultationDate).isBefore(new Date())) ? false : true}
                                                 toggled={user.attended}
                                                 onToggle={() => onToggle(user._id, user.attended)}/>
-                                            {user.attended && <ClayButtonWithIcon className="btn btn-primary btn-sm ml-2"
+                                            {user.attended && <ClayButtonWithIcon title="table-button" className="btn btn-primary btn-sm ml-2"
                                                 symbol="comments" onClick={() => onClick(user._id, user.consultInfo)} />}
                                         </td>
                                     </tr>

@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Page renders 1`] = `
+<DocumentFragment>
+  <div
+    id="container"
+  >
+    <div
+      class="mt-4 container"
+    >
+      <div
+        class="row justify-content-between"
+      >
+        <div
+          class="col"
+        >
+          <h1 />
+        </div>
+        <div
+          class="col-3"
+        >
+          <img
+            alt="Logo do site"
+            src="VaciCuidar_logo.png"
+            width="250px"
+          />
+        </div>
+      </div>
+      <h1
+        class="welcome"
+      >
+        Bem Vindo!
+      </h1>
+      <h2
+        class="mt-4"
+      >
+        Devemos nos cuidar sempre!
+      </h2>
+      <h2>
+        Tomar a vacina é um cuidado e dever de todos!
+      </h2>
+      <button
+        class="mt-4 btn btn-primary"
+        data-testid="homeButton"
+        type="button"
+      >
+        Agendar Vacinação!
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

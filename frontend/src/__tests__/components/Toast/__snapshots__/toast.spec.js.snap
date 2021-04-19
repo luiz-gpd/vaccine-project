@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toast component renders 1`] = `
+<DocumentFragment>
+  <div
+    class="alert-container container"
+  >
+    <div
+      class="alert-notifications alert-notifications-fixed"
+    >
+      <div
+        class="alert alert-info"
+        role="alert"
+      >
+        <div
+          class="alert-autofit-row autofit-row"
+        >
+          <div
+            class="autofit-col"
+          >
+            <div
+              class="autofit-section"
+            >
+              <span
+                class="alert-indicator"
+              >
+                <svg
+                  class="lexicon-icon lexicon-icon-info-circle"
+                  role="presentation"
+                >
+                  <use
+                    xlink:href="#info-circle"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            class="autofit-col autofit-col-expand"
+          >
+            <div
+              class="autofit-section"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
