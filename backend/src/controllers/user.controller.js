@@ -7,6 +7,17 @@ class User {
 
         res.send(users)
     }
+    
+    async getOne(req, res) {
+    const { id } = req.params;
+
+    try {
+      const user = await UserModel.findById(id);
+      res.send(user);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 
     async store(req, res) {
         const body = req.body;
@@ -26,12 +37,14 @@ class User {
                     const toRemove = await UserModel.findById(onThisTime[1]._id)
                     await toRemove.remove();
                 }
+                res.status(201);
                 res.send(user);
             } else {
-                res.send("Error on post")            }
+                res.send({ message: "Erro ao criar usuário" })            }
         } else {
 
             const user = await UserModel.create(body);
+            res.status(201);
             res.send(user);
         }
 
@@ -50,13 +63,13 @@ class User {
 
         try {
             const user = await UserModel.findById(_id)
-            if (!user) { return res.json({ message: "Usuário inexistente" }) }
+            if (!user) { return (res.json({ message: "Usuário inexistente" })) }
 
             await user.remove();
             res.json({ message: "Usuário removido" });
 
         } catch (e) {
-            res.status(400).json({ message: e.message });
+            res.status(400).json({ message: "Usuário inexistente" });
         }
     }
 

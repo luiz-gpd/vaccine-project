@@ -46,7 +46,7 @@ const Agendamento = () => {
         try {
             const response = await api.post('/user', user)
             const value = Math.random() * 100
-            if (response.data === "Error on post") {
+            if (response.data === "Erro ao criar usuário") {
                 setToastType(false);
                 dispatch({
                     type: "SHOW_TOAST",
