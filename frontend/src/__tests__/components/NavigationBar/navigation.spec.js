@@ -1,9 +1,9 @@
-import NavigationBar from "../../../components/NavigationBar";
+import NavigationBar from "../../../components/NavigationBar"
 
-import AppContext, { initialState } from "../../../AppContext";
+import AppContext, { initialState } from "../../../AppContext"
 
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { render, fireEvent, waitFor } from "@testing-library/react"
+import { BrowserRouter } from "react-router-dom"
 
 const NavigationBarWrapper = ({ state = initialState, dispatch }) => (
     <AppContext.Provider value={[state, dispatch]}>

@@ -2,8 +2,6 @@ import React from 'react'
 import ClayAlert from '@clayui/alert'
 
 const Toast = ({children, title, type, toast, onClose}) => {
-
-    console.log(toast)
     
     return (
         

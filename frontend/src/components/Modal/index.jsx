@@ -49,10 +49,10 @@ const Modal = ({
                     <ClayModal.Footer
                         first={<>
                                 <ClayButton displayType="secondary" onClick={setShowChanger}>Alterar</ClayButton>
-                                {showChanger && (<><ClayInput data-testid='formField' name="information" className="mt-4 mb-2" value={form.information} onChange={onChange}/>
-                                <ClayButton data-testid='formButtonSave' displayType="primary" onClick={onClick}>Salvar</ClayButton></>)}
+                                {showChanger && (<><ClayInput data-testid='formField' name="information" className="mt-4 mb-2 formfield" value={form.information} onChange={onChange}/>
+                                <ClayButton displayType="primary" onClick={onClick}>Salvar</ClayButton></>)}
                         </>}
-                        last={<ClayButton className="btn btn-danger" onClick={onClose}>Fechar</ClayButton>}
+                        last={<ClayButton data-testid='closeButtonSave' className="btn btn-danger" onClick={onClose}>Fechar</ClayButton>}
                     />
                 </ClayModal>
             )}

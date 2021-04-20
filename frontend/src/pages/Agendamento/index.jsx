@@ -111,7 +111,7 @@ const Agendamento = () => {
                             </ClaySelectWithOption>
                             <ErrorMessage name="consultationTime" />
                         </ClayForm.Group>
-                        <ClayButton type="submit">Enviar</ClayButton>
+                        <ClayButton className="form-button" type="submit">Enviar</ClayButton>
                     </Form>
                 )}
             </Formik>

@@ -1,6 +1,6 @@
-import Page from "../../../components/Page";
+import Page from "../../../components/Page"
 
-import { render } from "@testing-library/react";
+import { render } from "@testing-library/react"
 
 describe("Page Component", () => {
     it("renders", () => {

@@ -6,12 +6,14 @@ const Routes = require('./routes');
 
 require('dotenv').config();
 
-const { MONGO_URL ,HTTP_PORT } = process.env;
+const { MONGO_URL, HTTP_PORT, NODE_ENV } = process.env;
 
-mongoose.connect(MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+if (NODE_ENV !== "test") {
+    mongoose.connect(MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+}
 
 const app = express();
 
@@ -22,9 +24,11 @@ app.use(morgan("dev"));
 app.use(Routes);
 
 app.get('/', (req, res) => {
-    res.json({message:"Working"})
+    res.json({ message: "Working" })
 });
 
 app.listen(HTTP_PORT, () => {
     console.log(`Working on ${HTTP_PORT}`)
 });
+
+module.exports = app;

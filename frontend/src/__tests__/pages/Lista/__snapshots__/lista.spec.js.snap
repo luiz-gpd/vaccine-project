@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Lista page renders 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-4 container"
+  >
+    <div
+      class="row justify-content-between"
+    >
+      <div
+        class="col"
+      >
+        <h1>
+          Lista de Agendamentos
+        </h1>
+      </div>
+      <div
+        class="col-3"
+      >
+        <img
+          alt="Logo do site"
+          src="VaciCuidar_logo.png"
+          width="250px"
+        />
+      </div>
+    </div>
+    <span>
+       Não há nenhuma consulta agendada
+    </span>
+  </div>
+</DocumentFragment>
+`;

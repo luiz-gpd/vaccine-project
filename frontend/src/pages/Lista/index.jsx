@@ -35,14 +35,6 @@ const Lista = () => {
         getUsers();
     }, [])
 
-    // const getModalInfo = (id, info) => {
-    //     setVisible(true);
-    //     setForm({
-    //         _id: id,
-    //         consultInfo: info
-    //     })
-    // }
-
     const usersPerPage = 10;
     const pagesTotal = Math.ceil(users.length / usersPerPage)
 
@@ -50,6 +42,7 @@ const Lista = () => {
         <Page title="Lista de Agendamentos">
                {users.length !== 0 ? ( <>
                     <ClayInput className="mt-4"
+                        data-testid="search-input"
                         value={search}
                         name="search"
                         type="text"

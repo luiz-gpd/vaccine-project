@@ -56,7 +56,8 @@ const Table = ( { usersPerPage, pageNumber } ) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {// eslint-disable-next-line array-callback-return
+                            {users && (
+                            // eslint-disable-next-line array-callback-return
                             users.filter((user)=> {
                                     if (search === "") {
                                         return user;
@@ -82,13 +83,14 @@ const Table = ( { usersPerPage, pageNumber } ) => {
                                             <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
                                                 disabled={(moment(user.consultationDate).isBefore(new Date())) ? false : true}
                                                 toggled={user.attended}
+                                                data-testid='table-toggle'
                                                 onToggle={() => onToggle(user._id, user.attended)}/>
-                                            {user.attended && <ClayButtonWithIcon title="table-button" className="btn btn-primary btn-sm ml-2"
+                                            {user.attended && <ClayButtonWithIcon data-testid="table-button" className="btn btn-primary btn-sm ml-2"
                                                 symbol="comments" onClick={() => onClick(user._id, user.consultInfo)} />}
                                         </td>
                                     </tr>
 
-                                ))}
+                                )))}
                         </tbody>
                     </table>
     )

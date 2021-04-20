@@ -3,8 +3,6 @@ import ClayButton from '@clayui/button'
 import Page from '../../components/Page'
 
 const Home = ( {history} ) => {
-    
-    console.log(history.push);
 
     return (
         <div id="container">
