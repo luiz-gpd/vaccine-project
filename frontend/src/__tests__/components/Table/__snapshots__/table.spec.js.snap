@@ -26,5 +26,6 @@ exports[`Table Component renders 1`] = `
     </thead>
     <tbody />
   </table>
+  0
 </DocumentFragment>
 `;

@@ -1,25 +1,34 @@
-import Home from "../../../pages/Home"
-import { createMemoryHistory } from 'history'
-import { render, fireEvent, waitFor } from "@testing-library/react"
+import React from 'react';
+import Home from "../../../pages/Home";
+import { render, fireEvent } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+
+const mockHistoryPush = jest.fn();
+
+jest.mock('react-router', () => ({
+  ...jest.requireActual('react-router'),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
 describe("Home Page", () => {
-    const history = createMemoryHistory;
 
     it("renders", () => {
-        const { asFragment } = render(<Home
-            history={history}
-        />);
+        const { asFragment } = render(<Home/>);
 
         expect(asFragment()).toMatchSnapshot();
     });
-    it("Should submit when clicking on the button", async () => {
-        const history = createMemoryHistory;
+
+    it("Should submit when clicking on the button", () => {
         
-        const { getByTestId } = render(<Home
-            history={history}
-        />);
-    
-        // const homeButton = await waitFor(() => getByTestId('homeButton'))
-        // fireEvent.click(homeButton)
+        const { getByRole } = render(
+            <BrowserRouter>
+              <Home/>
+            </BrowserRouter>,
+          );
+
+        // fireEvent.click(getByRole('button'));
+        // expect(mockHistoryPush).toHaveBeenCalledWith('/user');
     });
 });

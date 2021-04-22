@@ -1,9 +1,9 @@
 import Lista from "../../../pages/Lista"
-
+import React from 'react'
 import AppContext, { initialState } from "../../../AppContext"
-
-import { render, fireEvent, waitFor } from "@testing-library/react"
+import { render, fireEvent, waitFor, screen } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom";
+import { renderHook } from '@testing-library/react-hooks'
 
 const ListaWrapper = ({ state = initialState, dispatch }) => (
     <AppContext.Provider value={[state, dispatch]}>
@@ -20,10 +20,17 @@ describe("Lista page", () => {
         expect(asFragment()).toMatchSnapshot();
     });
 
-    it("Button should submit when clicked", async () => {
+    it("On changing Input should call dispatch for changig search value", async () => {
         const dispatch = jest.fn();
+        const myInitialState = 
+             [ {
+                name: "Luiz",
+                age: "19"
+            }]
+        
+        React.useState = jest.fn().mockReturnValue([myInitialState, {}])
 
-        const { debug } = render(
+        render(
             <ListaWrapper
                 state={{
                     ...initialState,
@@ -31,27 +38,39 @@ describe("Lista page", () => {
                     modalInfo: {
                         userId: "6073716197bf474d08d1098f",
                         info: "Tudo bem",
-                        visible: false
+                        visible: true
                     },
                 }}
-                users={ {
-                    name:"Luiz",
-                    age:"19"
-                } }
                 dispatch={dispatch}
             />
         );
-        // const fieldNode = await waitFor(
-        //     () => queryByTestId('search-input')
-        // )
-        // fireEvent.change(
-        //     fieldNode,
-        //     { target: { value: 'test' } }
-        // )
 
-        // expect(fieldNode.value).toEqual(test)
+        const fieldNode = await waitFor(
+            () => screen.queryByTestId('search-input')
+        )
+        fireEvent.change(
+            fieldNode,
+            { target: { value: "test" } }
+        )
 
-        debug(undefined, 300000);
+        expect(fieldNode.value).toEqual('search')
+
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenLastCalledWith({
+          type: "USE_SEARCH",
+          payload: "test",
+        });
 
     });
+    // it("UseEffect should set users with data from the backend", () => {
+    //     const myInitialState = 
+    //          [ {
+    //             name: "Luiz",
+    //             age: "19"
+    //         }]
+
+    //     const { result } = renderHook(() => Lista(myInitialState))
+    //     expect(result.current).toBeUndefined();
+
+    // });
 });

@@ -37,11 +37,10 @@ exports[`Home Page renders 1`] = `
         Devemos nos cuidar sempre!
       </h2>
       <h2>
-        Tomar a vacina é um cuidado e dever de todos!
+        Tomar a vacina é um direito e um dever de todos!
       </h2>
       <button
         class="mt-4 btn btn-primary"
-        data-testid="homeButton"
         type="button"
       >
         Agendar Vacinação!

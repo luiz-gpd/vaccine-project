@@ -1,50 +1,20 @@
-import Modal from '../../../components/Modal/index'
-
-import AppContext, { initialState } from '../../../AppContext'
-
-import { render, screen, fireEvent } from "@testing-library/react"
-
-const ModalWrapper = ({ state = initialState, dispatch }) => (
-    <AppContext.Provider value={[state, dispatch]}>
-        <Modal />
-    </AppContext.Provider>
-);
-
-function renderModalWrapper() {
-    render(<ModalWrapper/>);
-  
-    return {
-      form: {
-        get change() {
-          return screen.getByTestId('formField');
-        },
-        get buttonClose() {
-          return screen.queryByText('Fechar');
-        }
-      }
-    };
-  }
+import Modal from '../../../components/Modal';
+import React from 'react'
+import { render, screen, fireEvent } from "@testing-library/react";
 
 describe("Modal component", () => {
     it("renders", () => {
-        const { asFragment } = render(<ModalWrapper />)
+        const { asFragment } = render(<Modal/>)
 
         expect(asFragment()).toMatchSnapshot();
     });
 
     it("Should change when writing on the input", () => {
-        const onClose = jest.fn();
-        const observer = jest.fn();
-        render(<ModalWrapper
-            visible={true}
-            showChange={true}
-            onClose={onClose}
-            observer={observer}
-            title="Título"
-            id="6073716197bf474d08d1098f"
-        >
-            <span>Tudo bem!</span>
-        </ModalWrapper>)
+
+        const myInitialState = true       
+        React.useState = jest.fn().mockReturnValue([myInitialState, {}])
+
+        render(<Modal/>)
 
         // const {change} = renderModalWrapper;
 

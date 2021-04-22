@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import Page from '../../components/Page'
 import api from '../../utils/api'
 import { ClayPaginationWithBasicItems } from '@clayui/pagination';
@@ -13,8 +13,8 @@ const Lista = () => {
 
     const [{ search, modalInfo }, dispatch] = useContext(AppContext);
      
-    const [users, setUsers] = useState([])
-    const [pageNumber, setPageNumber] = useState(1)
+    const [users, setUsers] = React.useState([])
+    const [pageNumber, setPageNumber] = React.useState(1)
     const { observer, onClose } = useModal({
         onClose: () => dispatch({
             type: "SET_MODAL",
@@ -22,7 +22,7 @@ const Lista = () => {
           }),
     });
 
-    const getUsers = () => {
+    const getUsers = async () => {
         api.get('/user').then((response) => {
             const { data } = response;
             setUsers(data);
@@ -40,7 +40,7 @@ const Lista = () => {
 
     return (
         <Page title="Lista de Agendamentos">
-               {users.length !== 0 ? ( <>
+               {users.length ? ( <>
                     <ClayInput className="mt-4"
                         data-testid="search-input"
                         value={search}

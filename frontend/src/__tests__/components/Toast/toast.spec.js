@@ -1,6 +1,6 @@
-import Toast from "../../../components/Toast"
+import Toast from "../../../components/Toast";
 
-import { render } from "@testing-library/react"
+import { render } from "@testing-library/react";
 
 describe("Toast component", () => {
     it("renders", () => {

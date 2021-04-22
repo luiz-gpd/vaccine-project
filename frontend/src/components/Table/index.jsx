@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import moment from 'moment'
 import api from '../../utils/api'
 import { ClayToggle } from '@clayui/form'
@@ -8,9 +8,9 @@ import AppContext from '../../AppContext'
 const Table = ( { usersPerPage, pageNumber } ) => {
 
     const [{ search }, dispatch] = useContext(AppContext);
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = React.useState([])
 
-    const getUsers = () => {
+    const getUsers = async () => {
         api.get('/user').then((response) => {
             const { data } = response;
             setUsers(data);
@@ -56,7 +56,7 @@ const Table = ( { usersPerPage, pageNumber } ) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {users && (
+                            {users.length && (
                             // eslint-disable-next-line array-callback-return
                             users.filter((user)=> {
                                     if (search === "") {

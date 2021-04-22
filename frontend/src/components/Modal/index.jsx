@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ClayButton from '@clayui/button'
 import ClayModal from '@clayui/modal'
 import { ClayInput } from '@clayui/form'
@@ -16,8 +16,8 @@ const Modal = ({
     const initialState = {
         information:""
     }
-    const [showChanger, setShowChanger] = useState(false)
-    const [form, setForm] = useState(initialState)
+    const [showChanger, setShowChanger] = React.useState(false)
+    const [form, setForm] = React.useState(initialState)
     
     const onChange = ({ target: { name, value } }) => {
         setForm({

@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../index');
 const UserModel = require("../models/user.model");
 const mongoose = require('mongoose')
-const { user1, user2, newUser, extraYoungUser, extraOldUser } = require('../test_utils/seeds')
+const { user1, user2, newUser, extraYoungUser, extraOldUser, lateUser, otherTimeUser } = require('../test_utils/seeds')
 
 require('dotenv').config();
 
@@ -94,6 +94,24 @@ describe ('Extra utilities on user controller', () => {
 
     const res3 = await request(app).get(`/api/user/${user1._id}`);
     expect(res3.body).not.toBeValid;
+  });
+  it('Should not let the consultation date be one that already passed or today', async () => {
+    
+    const res = await request(app).post("/api/user").send(lateUser);
+    expect(res.status).toBe(400)
+    expect(res.body).toEqual({ message: "Não é possível agendar para esse dia" });
+
+    const res2 = await request(app).get(`/api/user/${lateUser._id}`);
+    expect(res2.status).toBe(200);
+  });
+  it('Should not let the consultation time be different of HH:00 or HH:30', async () => {
+    
+    const res = await request(app).post("/api/user").send(otherTimeUser);
+    expect(res.status).toBe(400)
+    expect(res.body).toEqual({ message: "Não é possível agendar para esse horário" });
+
+    const res2 = await request(app).get(`/api/user/${otherTimeUser._id}`);
+    expect(res2.status).toBe(200);
   });
 
 });
