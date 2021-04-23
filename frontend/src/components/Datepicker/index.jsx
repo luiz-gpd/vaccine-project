@@ -26,7 +26,8 @@ function DatePicker (props) {
               onChange={val => setFieldValue(name, val)}
               dateFormat="dd/MM/yyyy"
               showYearDropdown
-              scrollableMonthYearDropdown
+              scrollableYearDropdown
+              yearDropdownItemNumber={100}
               placeholderText="00/00/0000"
               autoComplete="off"
               locale="pt"
