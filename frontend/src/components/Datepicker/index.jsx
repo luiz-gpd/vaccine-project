@@ -7,7 +7,7 @@ import pt from "date-fns/locale/pt";
 
 function DatePicker (props) {
   
-  const { b, name, ...rest } = props
+  const { b, name, numberOfYears, ...rest } = props
   registerLocale("pt", pt)
 
   return (
@@ -27,7 +27,7 @@ function DatePicker (props) {
               dateFormat="dd/MM/yyyy"
               showYearDropdown
               scrollableYearDropdown
-              yearDropdownItemNumber={100}
+              yearDropdownItemNumber={numberOfYears}
               placeholderText="00/00/0000"
               autoComplete="off"
               locale="pt"

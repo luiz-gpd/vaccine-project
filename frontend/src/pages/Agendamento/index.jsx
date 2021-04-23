@@ -91,6 +91,7 @@ const Agendamento = () => {
                                     b="Data de Nascimento: "
                                     name="birthDate"
                                     maxDate={new Date()}
+                                    numberOfYears={100}
                                 />
                             </ClayForm.Group></div>
                             <div className="ml-6">
@@ -99,6 +100,7 @@ const Agendamento = () => {
                                         b="Data da consulta: "
                                         name="consultationDate"
                                         minDate={new Date()}
+                                        numberOfYears={1}
                                     />
                                 </ClayForm.Group></div></div>
                         <ClayForm.Group>
