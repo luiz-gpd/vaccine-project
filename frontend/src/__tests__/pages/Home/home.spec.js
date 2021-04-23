@@ -1,7 +1,6 @@
-import React from 'react';
-import Home from "../../../pages/Home";
-import { render, fireEvent } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react'
+import Home from "../../../pages/Home"
+import { render } from "@testing-library/react"
 
 const mockHistoryPush = jest.fn();
 
@@ -18,17 +17,5 @@ describe("Home Page", () => {
         const { asFragment } = render(<Home/>);
 
         expect(asFragment()).toMatchSnapshot();
-    });
-
-    it("Should submit when clicking on the button", () => {
-        
-        const { getByRole } = render(
-            <BrowserRouter>
-              <Home/>
-            </BrowserRouter>,
-          );
-
-        // fireEvent.click(getByRole('button'));
-        // expect(mockHistoryPush).toHaveBeenCalledWith('/user');
     });
 });

@@ -2,7 +2,8 @@ const request = require('supertest');
 const app = require('../index');
 const UserModel = require("../models/user.model");
 const mongoose = require('mongoose')
-const { user1, user2, newUser, extraYoungUser, extraOldUser, lateUser, otherTimeUser } = require('../test_utils/seeds')
+const { user1, user2, newUser, extraYoungUser,
+  extraOldUser, lateUser, otherTimeUser, oldUser, oldUser2, extraOldUser2 } = require('../test_utils/seeds')
 
 require('dotenv').config();
 
@@ -79,6 +80,21 @@ describe ('Extra utilities on user controller', () => {
 
     const res2 = await request(app).get(`/api/user/${extraYoungUser}`);
     expect(res2.status).toBe(400);
+  });
+
+  it('Should not let three elderly users at same day and time', async () => {
+    
+    const res0 = await request(app).post("/api/user").send(oldUser);
+    expect(res0.status).toBe(201);
+
+    const res1 = await request(app).post("/api/user").send(oldUser2);
+    expect(res1.status).toBe(201);
+
+    const res2 = await request(app).post("/api/user").send(extraOldUser2);
+    expect(res2.body).toEqual({ message: "Erro ao criar usuário" });
+
+    const res3 = await request(app).get(`/api/user/${extraOldUser2}`);
+    expect(res3.status).toBe(400);
   });
 
   it('Should remove the younger user when a elderly comes to the same hour', async () => {

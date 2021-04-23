@@ -1,7 +1,5 @@
 import Agendamento from "../../../pages/Agendamento"
-
 import AppContext, { initialState } from "../../../AppContext"
-
 import { render, fireEvent, waitFor } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom"
 

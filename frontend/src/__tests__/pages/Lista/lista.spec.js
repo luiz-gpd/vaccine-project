@@ -2,8 +2,7 @@ import Lista from "../../../pages/Lista"
 import React from 'react'
 import AppContext, { initialState } from "../../../AppContext"
 import { render, fireEvent, waitFor, screen } from "@testing-library/react"
-import { BrowserRouter } from "react-router-dom";
-import { renderHook } from '@testing-library/react-hooks'
+import { BrowserRouter } from "react-router-dom"
 
 const ListaWrapper = ({ state = initialState, dispatch }) => (
     <AppContext.Provider value={[state, dispatch]}>
@@ -62,15 +61,4 @@ describe("Lista page", () => {
         });
 
     });
-    // it("UseEffect should set users with data from the backend", () => {
-    //     const myInitialState = 
-    //          [ {
-    //             name: "Luiz",
-    //             age: "19"
-    //         }]
-
-    //     const { result } = renderHook(() => Lista(myInitialState))
-    //     expect(result.current).toBeUndefined();
-
-    // });
 });

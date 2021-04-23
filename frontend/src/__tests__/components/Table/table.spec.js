@@ -1,7 +1,7 @@
 import Table from "../../../components/Table";
 import React from 'react'
 import AppContext, { initialState } from "../../../AppContext";
-import { screen, render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 const TableWrapper = ({ state = initialState, dispatch }) => (
   <AppContext.Provider value={[state, dispatch]}>
@@ -57,8 +57,7 @@ describe("Table Component", () => {
     expect(queryByText("Atendimento")).toBeTruthy();
 
   });
-  it("Should works click and toggle when search input is full, and dates are the same",
-    () => {
+  it("renders with context when search input is full, and dates are the same",() => {
       const dispatch = jest.fn();
 
       const myInitialState =
@@ -82,7 +81,7 @@ describe("Table Component", () => {
 
       React.useState = jest.fn().mockReturnValue([myInitialState, {}])
 
-      const { queryByText, queryByTestId } = render(
+      render(
         <TableWrapper
           state={{
             ...initialState,
@@ -93,9 +92,5 @@ describe("Table Component", () => {
           dispatch={dispatch}
         />
       );
-      // const tableButton = queryByTestId("table-button");
-      // fireEvent.click(tableButton);
-
-      screen.debug();
     });
 });

@@ -70,6 +70,36 @@ const otherTimeUser = {
   consultInfo: ""
 };
 
+const oldUser = {
+  _id: ObjectID(),
+  name: "idoso1",
+  age: 80,
+  consultationDate: "2021-06-12T03:00:00.000Z",
+  consultationTime: "12:00",
+  attended: false,
+  consultInfo: ""
+};
+
+const oldUser2 = {
+  _id: ObjectID(),
+  name: "idoso2",
+  age: 80,
+  consultationDate: "2021-06-12T03:00:00.000Z",
+  consultationTime: "12:00",
+  attended: false,
+  consultInfo: ""
+};
+
+const extraOldUser2 = {
+  _id: ObjectID(),
+  name: "Idoso3",
+  age: 80,
+  consultationDate: "2021-06-12T03:00:00.000Z",
+  consultationTime: "12:00",
+  attended: false,
+  consultInfo: ""
+};
+
 module.exports = {
   user1,
   user2,
@@ -77,5 +107,8 @@ module.exports = {
   extraYoungUser,
   extraOldUser,
   lateUser,
-  otherTimeUser
+  otherTimeUser,
+  oldUser,
+  oldUser2,
+  extraOldUser2
 };

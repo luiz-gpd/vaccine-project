@@ -5,7 +5,7 @@ import Agendamento from './pages/Agendamento';
 import Home from './pages/Home';
 import Lista from './pages/Lista';
 
-const Routes = (props) => {
+const Routes = () => {
 
     return (
         <BrowserRouter>

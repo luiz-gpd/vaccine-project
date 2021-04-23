@@ -42,7 +42,7 @@ const Table = ( { usersPerPage, pageNumber } ) => {
         getUsers();
     }
 
-    const pagesVisited = pageNumber * usersPerPage;
+    let pagesVisited = pageNumber * usersPerPage;
 
     return (
         <table className="content-table">
@@ -62,6 +62,7 @@ const Table = ( { usersPerPage, pageNumber } ) => {
                                     if (search === "") {
                                         return user;
                                     } else if(user.name.toLowerCase().includes(search.toLowerCase())) {
+                                        pagesVisited=10;
                                         return user;
                                     }
                                 })
@@ -79,15 +80,13 @@ const Table = ( { usersPerPage, pageNumber } ) => {
                                         <td>{user.age}</td>
                                         <td>{moment(user.consultationDate).format("DD/MM/yyyy")}</td>
                                         <td>{user.consultationTime}</td>
-                                        <td>
-                                            <ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
+                                        <td><ClayToggle label={user.attended ? "Realizado" : "Não foi realizado"}
                                                 disabled={(moment(user.consultationDate).isBefore(new Date())) ? false : true}
                                                 toggled={user.attended}
                                                 data-testid='table-toggle'
                                                 onToggle={() => onToggle(user._id, user.attended)}/>
                                             {user.attended && <ClayButtonWithIcon data-testid="table-button" className="btn btn-primary btn-sm ml-2"
-                                                symbol="comments" onClick={() => onClick(user._id, user.consultInfo)} />}
-                                        </td>
+                                                symbol="comments" onClick={() => onClick(user._id, user.consultInfo)} />}</td>
                                     </tr>
 
                                 )))}

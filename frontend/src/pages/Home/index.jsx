@@ -2,7 +2,7 @@ import React from 'react'
 import ClayButton from '@clayui/button'
 import Page from '../../components/Page'
 
-const Home = ( {history}) => {
+const Home = ( {history} ) => {
 
     return (
         <div id="container">
